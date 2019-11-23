@@ -1,0 +1,33 @@
+{
+  "name": "@zcong/nest-stack-logger",
+  "version": "0.1.1",
+  "description": "> TODO: description",
+  "author": "zcong1993 <zhangcong1992@gmail.com>",
+  "homepage": "https://github.com/zcong1993/nest-stack#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "*.ts"
+  ],
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zcong1993/nest-stack.git"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/zcong1993/nest-stack/issues"
+  },
+  "dependencies": {
+    "@zcong/nest-stack-context": "^0.1.1",
+    "colors": "^1.4.0",
+    "winston": "^3.2.1"
+  }
+}

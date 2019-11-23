@@ -29,7 +29,9 @@ export class RequestContext {
     return null;
   }
 
-  public static currentRequestId(): string {
-    return RequestContext.currentRequestContext()!.requestId;
+  public static currentRequestId(): string | null {
+    return RequestContext.currentRequestContext()
+      ? RequestContext.currentRequestContext()!.requestId
+      : null;
   }
 }
