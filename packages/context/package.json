@@ -5,6 +5,11 @@
   "author": "zcong1993 <zhangcong1992@gmail.com>",
   "homepage": "https://github.com/zcong1993/nest-stack#readme",
   "license": "MIT",
+  "files": [
+    "dist",
+    "*.ts"
+  ],
+  "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
