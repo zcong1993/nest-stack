@@ -12,7 +12,7 @@ export class RequestContext {
   constructor(request: Request, response: Response) {
     this.request = request;
     this.response = response;
-    this.requestId = request.header['x-request-id'] || uuidV4();
+    this.requestId = (request.headers['x-request-id'] as string) || uuidV4();
   }
 
   public static currentRequestContext(): RequestContext {

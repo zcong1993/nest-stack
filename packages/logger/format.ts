@@ -13,7 +13,7 @@ export const nestLikeConsoleFormat = () =>
         ('undefined' !== typeof context
           ? `${yellow('[' + context + ']')} `
           : '') +
-        ('undefined' !== typeof requestId ? `${requestId} ` : '') +
+        (!!requestId ? `${requestId} ` : '') +
         `${green(message)} - ` +
         `${JSON.stringify(meta)}`
       );
