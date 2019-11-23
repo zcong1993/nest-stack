@@ -1,0 +1,29 @@
+{
+  "name": "@zcong/nest-stack-context",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "zcong1993 <zhangcong1992@gmail.com>",
+  "homepage": "https://github.com/zcong1993/nest-stack#readme",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zcong1993/nest-stack.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "tsc": "tsc"
+  },
+  "bugs": {
+    "url": "https://github.com/zcong1993/nest-stack/issues"
+  },
+  "dependencies": {
+    "asyncctx": "^2.0.9",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/uuid": "^3.4.6"
+  }
+}
