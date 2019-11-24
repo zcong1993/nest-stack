@@ -1,6 +1,6 @@
 import Axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { RequestContext } from '@zcong/nest-stack-context';
-import { defer, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Inject, HttpService as BaseHttpService } from '@nestjs/common';
 import {
   NEST_STACK_AXIOS_INSTANCE_TOKEN,
