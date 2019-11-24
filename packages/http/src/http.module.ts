@@ -11,7 +11,7 @@ import {
   HttpModuleAsyncOptions,
   HttpModuleOptions,
   HttpModuleOptionsFactory,
-} from './http.interface';
+} from './http.interfaces';
 
 @Module({
   providers: [

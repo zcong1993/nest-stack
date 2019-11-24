@@ -6,7 +6,7 @@ import {
   NEST_STACK_AXIOS_INSTANCE_TOKEN,
   NEST_STACK_HTTP_MODULE_OPTIONS,
 } from './http.constants';
-import { HttpModuleOptions } from './http.interface';
+import { HttpModuleOptions } from './http.interfaces';
 
 export class HttpTracingService extends BaseHttpService {
   private redirectHeaderKeys: string[];
