@@ -2,11 +2,11 @@ import Axios from 'axios';
 import { Module, DynamicModule, Provider } from '@nestjs/common';
 import { randomStringGenerator } from '@nestjs/common/utils/random-string-generator.util';
 import {
-  AXIOS_INSTANCE_TOKEN,
-  HTTP_MODULE_ID,
-  HTTP_MODULE_OPTIONS,
+  NEST_STACK_AXIOS_INSTANCE_TOKEN,
+  NEST_STACK_HTTP_MODULE_ID,
+  NEST_STACK_HTTP_MODULE_OPTIONS,
 } from './http.constants';
-import { HttpService } from './http.service';
+import { HttpTracingService } from './http.service';
 import {
   HttpModuleAsyncOptions,
   HttpModuleOptions,
@@ -15,29 +15,25 @@ import {
 
 @Module({
   providers: [
-    HttpService,
+    HttpTracingService,
     {
-      provide: AXIOS_INSTANCE_TOKEN,
+      provide: NEST_STACK_AXIOS_INSTANCE_TOKEN,
       useValue: Axios,
     },
   ],
-  exports: [HttpService],
+  exports: [HttpTracingService],
 })
-export class HttpModule {
+export class HttpTracingModule {
   static register(config: HttpModuleOptions): DynamicModule {
     return {
-      module: HttpModule,
+      module: HttpTracingModule,
       providers: [
         {
-          provide: AXIOS_INSTANCE_TOKEN,
-          useValue: Axios.create(config),
-        },
-        {
-          provide: HTTP_MODULE_ID,
+          provide: NEST_STACK_HTTP_MODULE_ID,
           useValue: randomStringGenerator(),
         },
         {
-          provide: HTTP_MODULE_OPTIONS,
+          provide: NEST_STACK_HTTP_MODULE_OPTIONS,
           useValue: config,
         },
       ],
@@ -46,17 +42,17 @@ export class HttpModule {
 
   static registerAsync(options: HttpModuleAsyncOptions): DynamicModule {
     return {
-      module: HttpModule,
+      module: HttpTracingModule,
       imports: options.imports,
       providers: [
         ...this.createAsyncProviders(options),
         {
-          provide: AXIOS_INSTANCE_TOKEN,
+          provide: NEST_STACK_AXIOS_INSTANCE_TOKEN,
           useFactory: (config: HttpModuleOptions) => Axios.create(config),
-          inject: [HTTP_MODULE_OPTIONS],
+          inject: [NEST_STACK_HTTP_MODULE_OPTIONS],
         },
         {
-          provide: HTTP_MODULE_ID,
+          provide: NEST_STACK_HTTP_MODULE_ID,
           useValue: randomStringGenerator(),
         },
         ...(options.extraProviders || []),
@@ -84,13 +80,13 @@ export class HttpModule {
   ): Provider {
     if (options.useFactory) {
       return {
-        provide: HTTP_MODULE_OPTIONS,
+        provide: NEST_STACK_HTTP_MODULE_OPTIONS,
         useFactory: options.useFactory,
         inject: options.inject || [],
       };
     }
     return {
-      provide: HTTP_MODULE_OPTIONS,
+      provide: NEST_STACK_HTTP_MODULE_OPTIONS,
       useFactory: async (optionsFactory: HttpModuleOptionsFactory) =>
         optionsFactory.createHttpOptions(),
       inject: [options.useExisting || options.useClass],

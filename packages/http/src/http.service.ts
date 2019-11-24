@@ -1,19 +1,26 @@
 import Axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { RequestContext } from '@zcong/nest-stack-context';
 import { defer, Observable } from 'rxjs';
-import { Inject } from '@nestjs/common';
-import { AXIOS_INSTANCE_TOKEN, HTTP_MODULE_OPTIONS } from './http.constants';
+import { Inject, HttpService as BaseHttpService } from '@nestjs/common';
+import {
+  NEST_STACK_AXIOS_INSTANCE_TOKEN,
+  NEST_STACK_HTTP_MODULE_OPTIONS,
+} from './http.constants';
 import { HttpModuleOptions } from './http.interface';
 
-export class HttpService {
+export class HttpTracingService extends BaseHttpService {
   private redirectHeaderKeys: string[];
 
   constructor(
-    @Inject(AXIOS_INSTANCE_TOKEN)
-    private readonly instance: AxiosInstance = Axios,
-    @Inject(HTTP_MODULE_OPTIONS)
-    private readonly config: HttpModuleOptions,
+    @Inject(NEST_STACK_HTTP_MODULE_OPTIONS)
+    config?: HttpModuleOptions,
+    @Inject(NEST_STACK_AXIOS_INSTANCE_TOKEN)
+    instance?: AxiosInstance,
   ) {
+    if (config) {
+      instance = Axios.create(config);
+    }
+    super(instance);
     this.redirectHeaderKeys = config.redirectHeaderKeys || [
       'x-request-id',
       'x-b3-traceid',
@@ -28,7 +35,7 @@ export class HttpService {
 
   request<T = any>(config: AxiosRequestConfig): Observable<AxiosResponse<T>> {
     const c = this.injectRedirectHeadersToConfig(config);
-    return defer(() => this.instance.request<T>(c));
+    return super.request(c);
   }
 
   get<T = any>(
@@ -36,7 +43,7 @@ export class HttpService {
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
     const c = this.injectRedirectHeadersToConfig(config);
-    return defer(() => this.instance.get<T>(url, c));
+    return super.get(url, c);
   }
 
   delete<T = any>(
@@ -44,7 +51,7 @@ export class HttpService {
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
     const c = this.injectRedirectHeadersToConfig(config);
-    return defer(() => this.instance.delete(url, c));
+    return super.delete(url, c);
   }
 
   head<T = any>(
@@ -52,7 +59,7 @@ export class HttpService {
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
     const c = this.injectRedirectHeadersToConfig(config);
-    return defer(() => this.instance.head(url, c));
+    return super.head(url, c);
   }
 
   post<T = any>(
@@ -61,7 +68,7 @@ export class HttpService {
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
     const c = this.injectRedirectHeadersToConfig(config);
-    return defer(() => this.instance.post(url, data, c));
+    return super.post(url, c);
   }
 
   put<T = any>(
@@ -70,7 +77,7 @@ export class HttpService {
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
     const c = this.injectRedirectHeadersToConfig(config);
-    return defer(() => this.instance.put(url, data, c));
+    return super.put(url, c);
   }
 
   patch<T = any>(
@@ -79,11 +86,7 @@ export class HttpService {
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
     const c = this.injectRedirectHeadersToConfig(config);
-    return defer(() => this.instance.patch(url, data, c));
-  }
-
-  get axiosRef(): AxiosInstance {
-    return this.instance;
+    return super.patch(url, c);
   }
 
   private injectRedirectHeadersToConfig(config?: AxiosRequestConfig) {
