@@ -27,32 +27,32 @@ export class HttpService {
   }
 
   request<T = any>(config: AxiosRequestConfig): Observable<AxiosResponse<T>> {
-    this.injectRedirectHeadersToConfig(config);
-    return defer(() => this.instance.request<T>(config));
+    const c = this.injectRedirectHeadersToConfig(config);
+    return defer(() => this.instance.request<T>(c));
   }
 
   get<T = any>(
     url: string,
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
-    this.injectRedirectHeadersToConfig(config);
-    return defer(() => this.instance.get<T>(url, config));
+    const c = this.injectRedirectHeadersToConfig(config);
+    return defer(() => this.instance.get<T>(url, c));
   }
 
   delete<T = any>(
     url: string,
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
-    this.injectRedirectHeadersToConfig(config);
-    return defer(() => this.instance.delete(url, config));
+    const c = this.injectRedirectHeadersToConfig(config);
+    return defer(() => this.instance.delete(url, c));
   }
 
   head<T = any>(
     url: string,
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
-    this.injectRedirectHeadersToConfig(config);
-    return defer(() => this.instance.head(url, config));
+    const c = this.injectRedirectHeadersToConfig(config);
+    return defer(() => this.instance.head(url, c));
   }
 
   post<T = any>(
@@ -60,8 +60,8 @@ export class HttpService {
     data?: any,
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
-    this.injectRedirectHeadersToConfig(config);
-    return defer(() => this.instance.post(url, data, config));
+    const c = this.injectRedirectHeadersToConfig(config);
+    return defer(() => this.instance.post(url, data, c));
   }
 
   put<T = any>(
@@ -69,8 +69,8 @@ export class HttpService {
     data?: any,
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
-    this.injectRedirectHeadersToConfig(config);
-    return defer(() => this.instance.put(url, data, config));
+    const c = this.injectRedirectHeadersToConfig(config);
+    return defer(() => this.instance.put(url, data, c));
   }
 
   patch<T = any>(
@@ -78,8 +78,8 @@ export class HttpService {
     data?: any,
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
-    this.injectRedirectHeadersToConfig(config);
-    return defer(() => this.instance.patch(url, data, config));
+    const c = this.injectRedirectHeadersToConfig(config);
+    return defer(() => this.instance.patch(url, data, c));
   }
 
   get axiosRef(): AxiosInstance {
