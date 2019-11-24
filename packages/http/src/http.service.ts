@@ -86,11 +86,13 @@ export class HttpService {
     return this.instance;
   }
 
-  private injectRedirectHeadersToConfig(config: AxiosRequestConfig) {
+  private injectRedirectHeadersToConfig(config?: AxiosRequestConfig) {
     const reqContextHeaders = this.getRequestContextHeaders();
     if (!reqContextHeaders) {
-      return;
+      return config;
     }
+
+    const c: AxiosRequestConfig = config || {};
 
     const tracingHeaders: any = {};
     this.redirectHeaderKeys.forEach((key: string) => {
@@ -100,12 +102,17 @@ export class HttpService {
       }
     });
 
-    const configHeaders: any = config.headers || {};
+    if (this.redirectHeaderKeys.includes('x-request-id')) {
+      tracingHeaders['x-request-id'] = this.getRequestId();
+    }
+
+    const configHeaders: any = c.headers || {};
     const headers = {
       ...tracingHeaders,
       ...configHeaders,
     };
-    config.headers = headers;
+    c.headers = headers;
+    return c;
   }
 
   private getRequestContextHeaders() {
@@ -113,5 +120,9 @@ export class HttpService {
       RequestContext.currentRequest() &&
       RequestContext.currentRequest()!.headers
     );
+  }
+
+  private getRequestId() {
+    return RequestContext.currentRequestId();
   }
 }
