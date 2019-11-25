@@ -1,7 +1,7 @@
 {
   "name": "@zcong/nest-stack-context",
   "version": "0.5.1",
-  "description": "> TODO: description",
+  "description": "request context module",
   "author": "zcong1993 <zhangcong1992@gmail.com>",
   "homepage": "https://github.com/zcong1993/nest-stack#readme",
   "license": "MIT",
