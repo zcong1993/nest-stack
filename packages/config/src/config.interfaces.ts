@@ -1,3 +1,8 @@
+export type configFunc = () => any;
+
 export interface ConfigOption {
-  [env: string]: any;
+  default: configFunc;
+  prod?: configFunc;
+  local?: configFunc;
+  test?: configFunc;
 }
