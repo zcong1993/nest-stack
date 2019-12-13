@@ -1,4 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
+import * as deepAssign from 'object-assign-deep';
 import { ConfigOption } from './config.interfaces';
 import { NEST_STACK_CONFIG_OPTIONS } from './config.constants';
 
@@ -14,12 +15,11 @@ export class ConfigService<T = any> {
     }
     const env = process.env.NODE_ENV || 'local';
     if (validEnvs.includes(env) && this.option[env]) {
+      this.config = deepAssign({}, option.default(), option[env]());
+    } else {
       this.config = {
         ...option.default(),
-        ...option[env](),
       };
-    } else {
-      this.config = option.default();
     }
   }
 

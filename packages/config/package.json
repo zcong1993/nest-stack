@@ -23,5 +23,11 @@
   },
   "bugs": {
     "url": "https://github.com/zcong1993/nest-stack/issues"
+  },
+  "dependencies": {
+    "object-assign-deep": "^0.4.0"
+  },
+  "devDependencies": {
+    "@types/object-assign-deep": "^0.4.0"
   }
 }
