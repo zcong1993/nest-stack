@@ -1,6 +1,6 @@
 {
   "name": "@zcong/nest-stack-logger",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "> TODO: description",
   "author": "zcong1993 <zhangcong1992@gmail.com>",
   "homepage": "https://github.com/zcong1993/nest-stack#readme",
@@ -33,7 +33,7 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "@zcong/nest-stack-context": "^0.6.0",
+    "@zcong/nest-stack-context": "^0.7.0",
     "winston": "^3.2.1"
   }
 }
