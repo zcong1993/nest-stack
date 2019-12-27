@@ -30,10 +30,12 @@
   "peerDependencies": {
     "@nestjs/common": "^6.0.0",
     "@zcong/nest-stack-context": "*",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.0"
   },
   "devDependencies": {
     "@zcong/nest-stack-context": "^0.8.0",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.0"
   }
 }
