@@ -16,8 +16,8 @@ export class WinstonModule {
     const providers = createWinstonProviders(options);
 
     return {
+      providers,
       module: WinstonModule,
-      providers: providers,
       exports: providers,
     };
   }
@@ -28,9 +28,9 @@ export class WinstonModule {
     const providers = createWinstonAsyncProviders(options);
 
     return {
+      providers,
       module: WinstonModule,
       imports: options.imports,
-      providers: providers,
       exports: providers,
     } as DynamicModule;
   }

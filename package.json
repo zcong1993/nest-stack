@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "format": "prettier \"**/*.ts\" --ignore-path ./.prettierignore --write && git status",
-    "lint": "tslint -p tsconfig.json -c tslint.json \"packages/**/*.ts\" -e \"*.spec.ts\"",
+    "lint": "tslint -p tsconfig.json -c tslint.json \"packages/**/*.ts\"" ,
     "build": "npm run clean && lerna run tsc",
     "clean": "rm -rf packages/*/dist",
     "publish": "npm run build && lerna publish"
