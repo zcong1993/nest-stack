@@ -1,4 +1,4 @@
 flags:
   prometheus:
     paths:
-      - packages/promethus
+      - packages/prometheus/
