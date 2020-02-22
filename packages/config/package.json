@@ -19,15 +19,30 @@
   },
   "scripts": {
     "tsc": "tsc",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "npm run jest",
+    "test:cov": "npm run jest:cov",
+    "jest": "jest --detectOpenHandles --forceExit",
+    "jest:cov": "jest --coverage --detectOpenHandles --forceExit"
   },
   "bugs": {
     "url": "https://github.com/zcong1993/nest-stack/issues"
   },
   "dependencies": {
-    "object-assign-deep": "^0.4.0"
+    "extend2": "^1.0.0"
   },
-  "devDependencies": {
-    "@types/object-assign-deep": "^0.4.0"
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }

@@ -2,3 +2,6 @@ flags:
   prometheus:
     paths:
       - packages/prometheus/
+  config:
+    paths:
+      - packages/config/

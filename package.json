@@ -11,8 +11,8 @@
     "build": "npm run clean && lerna run tsc",
     "clean": "rm -rf packages/*/dist",
     "publish": "npm run build && lerna publish",
-    "test": "npm run lint && lerna run test --scope=@zcong/nest-stack-prometheus",
-    "test:cov": "npm run lint && lerna run test:cov --scope=@zcong/nest-stack-prometheus"
+    "test": "npm run lint && lerna run test --scope=@zcong/nest-stack-prometheus --scope=@zcong/nest-stack-config",
+    "test:cov": "npm run lint && lerna run test:cov --scope=@zcong/nest-stack-prometheus --scope=@zcong/nest-stack-config"
   },
   "dependencies": {
     "reflect-metadata": "^0.1.13"
