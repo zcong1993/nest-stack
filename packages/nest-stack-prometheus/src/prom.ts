@@ -18,7 +18,7 @@ export const createHttpRequestCounter = () => {
 export const createRequestDuration = (useHistogram: boolean) => {
   if (useHistogram) {
     return new Histogram({
-      name: `http_request_duration_ms`,
+      name: 'http_request_duration_ms',
       help: 'Duration of HTTP requests in ms',
       labelNames: ['route', 'method', 'status', 'normalizedStatus'],
       buckets: [5, 10, 25, 50, 100, 250, 500, 1000],
@@ -26,7 +26,7 @@ export const createRequestDuration = (useHistogram: boolean) => {
   }
 
   return new Summary({
-    name: `http_request_duration_ms`,
+    name: 'http_request_duration_ms',
     help: 'Duration of HTTP requests in ms',
     labelNames: ['route', 'method', 'status', 'normalizedStatus'],
   });
@@ -35,8 +35,8 @@ export const createRequestDuration = (useHistogram: boolean) => {
 export const createMetricsHandler: () => (
   req: Request,
   res: Response,
-) => Promise<void> = () => {
-  return async (_: Request, res: Response) => {
+) => void = () => {
+  return (_: Request, res: Response) => {
     res.setHeader('Content-Type', register.contentType);
     res.send(register.metrics());
   };

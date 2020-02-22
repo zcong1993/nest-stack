@@ -18,8 +18,8 @@ export const promMw = (c: Config) => {
     if (req.path === c.metricsPath) {
       return next();
     }
-    next();
     const startTime = hrtime();
+    next();
     res.on('finish', () => {
       const dur = nano2ms(hrtime() - startTime);
       const method = req.method;

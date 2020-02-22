@@ -12,10 +12,9 @@ export const setupProm = (app: INestApplication, config?: Config) => {
 
   app.use(async (req: any, res: any, next: any) => {
     if (req.path !== c.metricsPath) {
-      await next();
-      return;
+      return next();
     }
-    await handler(req, res);
+    handler(req, res);
   });
 
   if (c.collectDefaultMetrics) {
