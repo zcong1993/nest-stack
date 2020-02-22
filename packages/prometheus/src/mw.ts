@@ -24,8 +24,7 @@ export const promMw = (c: Config) => {
       const dur = nano2ms(hrtime() - startTime);
       const method = req.method;
       const status = res.statusCode;
-      const matchedRoute =
-        req.route.path || (req.route.regexp && req.route.regexp.source);
+      const matchedRoute = req.route?.path || req.route?.regexp?.source;
       const route = matchedRoute || '__no_matched';
       const labels: Record<string, string> = {
         route,

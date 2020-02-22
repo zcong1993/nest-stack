@@ -6,10 +6,12 @@
   "license": "MIT",
   "scripts": {
     "format": "prettier \"**/*.ts\" --ignore-path ./.prettierignore --write && git status",
-    "lint": "tslint -p tsconfig.json -c tslint.json \"packages/**/*.ts\"" ,
+    "lint": "tslint -p tsconfig.json -c tslint.json \"packages/**/*.ts\"",
     "build": "npm run clean && lerna run tsc",
     "clean": "rm -rf packages/*/dist",
-    "publish": "npm run build && lerna publish"
+    "publish": "npm run build && lerna publish",
+    "test": "npm run lint && lerna run test --scope=@zcong/nest-stack-prometheus",
+    "test:cov": "npm run lint && lerna run test:cov --scope=@zcong/nest-stack-prometheus"
   },
   "dependencies": {
     "reflect-metadata": "^0.1.13"
@@ -17,8 +19,10 @@
   "devDependencies": {
     "@nestjs/cli": "^6.9.0",
     "@nestjs/common": "^6.10.1",
+    "@nestjs/core": "^6.11.8",
+    "@nestjs/platform-express": "^6.11.8",
     "@nestjs/schematics": "^6.7.0",
-    "@nestjs/testing": "^6.7.1",
+    "@nestjs/testing": "^6.11.8",
     "@types/express": "^4.17.1",
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.5",
@@ -26,6 +30,7 @@
     "jest": "^24.9.0",
     "lerna": "^3.19.0",
     "prettier": "^1.18.2",
+    "rxjs": "^6.5.4",
     "supertest": "^4.0.2",
     "ts-jest": "^24.1.0",
     "ts-loader": "^6.1.1",

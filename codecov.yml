@@ -1,0 +1,4 @@
+flags:
+  prometheus:
+    paths:
+      - packages/promethus
