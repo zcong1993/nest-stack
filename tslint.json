@@ -17,8 +17,6 @@
   },
   "rulesDirectory": [],
   "linterOptions": {
-    "exclude": [
-        "packages/**/*.d.ts"
-    ]
-}
+    "exclude": ["packages/**/*.d.ts"]
+  }
 }

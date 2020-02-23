@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "format": "prettier \"**/*.ts\" --ignore-path ./.prettierignore --write && git status",
+    "format": "prettier '**/*.{ts,json,md}' --ignore-path ./.prettierignore --write && git status",
     "lint": "tslint -p tsconfig.json -c tslint.json \"packages/**/*.ts\"",
     "build": "npm run clean && lerna run tsc",
     "clean": "rm -rf packages/*/dist",
