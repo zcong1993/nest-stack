@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:11.10.1
+      - image: circleci/node:11.15.0
     branches:
       ignore:
         - gh-pages # list of branches to ignore
