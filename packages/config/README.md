@@ -22,13 +22,13 @@ import { ConfigModule } from '@zcong/nest-stack-config';
 
 interface Config {
   name: string;
-  optinal?: number;
+  optional?: number;
 }
 
 const defaultConfig = (): Config => ({ name: 'default' });
-const localConfig = (): Config => ({ name: 'local', optinal: 1 });
-const testConfig = (): Config => ({ name: 'test', optinal: 2 });
-const prodConfig = (): Config => ({ name: 'prod', optinal: 3 });
+const localConfig = (): Config => ({ name: 'local', optional: 1 });
+const testConfig = (): Config => ({ name: 'test', optional: 2 });
+const prodConfig = (): Config => ({ name: 'prod', optional: 3 });
 
 @Module({
   imports: [
