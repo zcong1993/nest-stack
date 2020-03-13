@@ -25,7 +25,7 @@
     "url": "https://github.com/zcong1993/nest-stack/issues"
   },
   "peerDependencies": {
-    "@nestjs/common": "^6.0.0",
+    "@nestjs/common": "^7.0.0",
     "@zcong/nest-stack-context": "*",
     "rxjs": "^6.0.0"
   },

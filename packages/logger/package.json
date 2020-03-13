@@ -28,7 +28,7 @@
     "colors": "^1.4.0"
   },
   "peerDependencies": {
-    "@nestjs/common": "^6.0.0",
+    "@nestjs/common": "^7.0.0",
     "@zcong/nest-stack-context": "*",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^4.4.0"

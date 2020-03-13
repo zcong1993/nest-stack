@@ -32,7 +32,7 @@
     "@types/uuid": "^7.0.0"
   },
   "peerDependencies": {
-    "@nestjs/common": "^6.0.0",
+    "@nestjs/common": "^7.0.0",
     "rxjs": "^6.0.0"
   }
 }
