@@ -21,13 +21,13 @@ const canUseNative = (): boolean => {
 
 export const RequestContext = ((canUseNative()
   ? RequestContextNative
-  : RequestContextCls) as any) as RequestContextCls;
+  : RequestContextCls) as any) as typeof RequestContextCls;
 export const cls = ((canUseNative() ? clsCls : clsNavive) as any) as
   | typeof clsCls
   | typeof clsNavive;
 export const RequestIdInterceptor = ((canUseNative()
   ? RequestIdInterceptorCls
-  : RequestIdInterceptorNative) as any) as RequestIdInterceptorCls;
+  : RequestIdInterceptorNative) as any) as typeof RequestIdInterceptorCls;
 export const createContextMiddleware = ((canUseNative()
   ? createContextMiddlewareCls
   : createContextMiddlewareNative) as any) as typeof createContextMiddlewareCls;
