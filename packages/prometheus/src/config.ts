@@ -13,7 +13,7 @@ export interface Config {
   requestDurationUseHistogram?: boolean;
 }
 
-export const defaultStatusNormalizer: StatusNormalizer = res => {
+export const defaultStatusNormalizer: StatusNormalizer = (res) => {
   const status = res.statusCode;
 
   if (status >= 200 && status < 300) {

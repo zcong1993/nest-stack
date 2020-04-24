@@ -92,7 +92,7 @@ it('custom config should work well', async () => {
 
 it('statusNormalizer should work well', async () => {
   const config: Config = {
-    statusNormalizer: r => {
+    statusNormalizer: (r) => {
       if (r.statusCode === 400) {
         return '2xx';
       }
