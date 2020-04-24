@@ -25,11 +25,13 @@
     "url": "https://github.com/zcong1993/nest-stack/issues"
   },
   "dependencies": {
-    "asyncctx": "^2.0.9",
     "uuid": "^7.0.0"
   },
   "devDependencies": {
     "@types/uuid": "^7.0.0"
+  },
+  "optionalDependencies": {
+    "asyncctx": "^2.0.9"
   },
   "peerDependencies": {
     "@nestjs/common": "^7.0.0",
