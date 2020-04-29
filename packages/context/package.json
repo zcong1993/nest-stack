@@ -25,7 +25,7 @@
     "url": "https://github.com/zcong1993/nest-stack/issues"
   },
   "dependencies": {
-    "uuid": "^7.0.0"
+    "uuid": "^8.0.0"
   },
   "devDependencies": {
     "@types/uuid": "^7.0.0"
