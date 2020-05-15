@@ -57,9 +57,9 @@ it('default config should work well', async () => {
   // test collect default metrics
   expect(res.text).toMatch(/process_cpu_user_seconds_total/);
   expect(res.text).toMatch(/TYPE http_request_duration_ms histogram/);
-  expect(res.text).toMatch(/normalizedStatus="2xx"/);
-  expect(res.text).toMatch(/normalizedStatus="3xx"/);
-  expect(res.text).toMatch(/normalizedStatus="4xx"/);
+  expect(res.text).toMatch(/status="2xx"/);
+  expect(res.text).toMatch(/status="3xx"/);
+  expect(res.text).toMatch(/status="4xx"/);
   expect(res.text).toMatch(/route="\/regex\/:id"/);
 
   clear();
@@ -92,7 +92,7 @@ it('custom config should work well', async () => {
 
 it('statusNormalizer should work well', async () => {
   const config: Config = {
-    statusNormalizer: r => {
+    statusNormalizer: (r) => {
       if (r.statusCode === 400) {
         return '2xx';
       }
@@ -105,12 +105,12 @@ it('statusNormalizer should work well', async () => {
   await request(app.getHttpServer()).get('/?status=400');
 
   const res = await request(app.getHttpServer()).get('/metrics');
-  expect(res.text).not.toMatch(/normalizedStatus="4xx"/);
-  expect(res.text).toMatch(/normalizedStatus="2xx"/);
+  expect(res.text).not.toMatch(/status="4xx"/);
+  expect(res.text).toMatch(/status="2xx"/);
 
   await request(app.getHttpServer()).get('/?status=500');
   const res1 = await request(app.getHttpServer()).get('/metrics');
-  expect(res1.text).toMatch(/normalizedStatus="5xx"/);
+  expect(res1.text).toMatch(/status="5xx"/);
 
   clear();
 });

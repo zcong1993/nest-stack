@@ -27,10 +27,11 @@ export const promMw = (c: Config) => {
       const matchedRoute = req.route?.path || req.route?.regexp?.source;
       const route = matchedRoute || '__no_matched';
       const labels: Record<string, string> = {
-        route,
         method,
-        status: `${status}`,
-        normalizedStatus: c.statusNormalizer(res),
+        routerName: route,
+        route,
+        originStatus: `${status}`,
+        status: c.statusNormalizer(res),
       };
       requestCounter.inc(labels, 1);
       requestDurationSummary.observe(labels, dur);

@@ -13,7 +13,7 @@ import { RequestContext } from './context';
 export class RequestIdInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     return next.handle().pipe(
-      map(data => {
+      map((data) => {
         const res: Response = context.switchToHttp().getResponse();
         if (
           !res.headersSent &&
