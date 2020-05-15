@@ -1,6 +1,6 @@
 {
   "name": "@zcong/nest-stack-http",
-  "version": "0.13.2",
+  "version": "0.13.3",
   "description": "> TODO: description",
   "author": "zcong1993 <zhangcong1992@gmail.com>",
   "homepage": "https://github.com/zcong1993/nest-stack#readme",
@@ -30,7 +30,7 @@
     "rxjs": "^6.0.0"
   },
   "devDependencies": {
-    "@zcong/nest-stack-context": "^0.13.2"
+    "@zcong/nest-stack-context": "^0.13.3"
   },
   "dependencies": {
     "axios": "^0.19.2"
