@@ -6,6 +6,7 @@ export const createContextMiddleware = () => async (
   next: () => void,
 ) => {
   const requestContext = new RequestContext(req, res);
-  cls.setContext(requestContext);
-  next();
+  cls.run(requestContext, () => {
+    next();
+  });
 };

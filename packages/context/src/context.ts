@@ -1,8 +1,8 @@
-import { ContinuationLocalStorage } from 'asyncctx';
+import { AsyncLocalStorage } from 'async_hooks';
 import { Request } from 'express';
 import { v4 as uuidV4 } from 'uuid';
 
-export const cls = new ContinuationLocalStorage<RequestContext>();
+export const cls = new AsyncLocalStorage<RequestContext>();
 
 export class RequestContext {
   public request: Request;
@@ -16,7 +16,7 @@ export class RequestContext {
   }
 
   public static currentRequestContext(): RequestContext {
-    return cls.getContext();
+    return cls.getStore();
   }
 
   public static currentRequest(): Request | null {
