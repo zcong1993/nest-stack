@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import { Module, DynamicModule, Provider } from '@nestjs/common';
 import { randomStringGenerator } from '@nestjs/common/utils/random-string-generator.util';
+import { TracerModule } from '@zcong/nest-stack-tracing';
 import {
   NEST_STACK_AXIOS_INSTANCE_TOKEN,
   NEST_STACK_HTTP_MODULE_ID,
@@ -25,6 +26,10 @@ import {
 })
 export class HttpTracingModule {
   static register(config: HttpModuleOptions): DynamicModule {
+    const imports = [];
+    if (config.withTracing) {
+      imports.push(TracerModule);
+    }
     return {
       module: HttpTracingModule,
       providers: [
@@ -37,6 +42,7 @@ export class HttpTracingModule {
           useValue: config,
         },
       ],
+      imports,
     };
   }
 

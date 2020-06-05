@@ -30,9 +30,11 @@
     "rxjs": "^6.0.0"
   },
   "devDependencies": {
-    "@zcong/nest-stack-context": "^0.14.1"
+    "@zcong/nest-stack-context": "^0.14.1",
+    "opentracing": "^0.14.4"
   },
   "dependencies": {
+    "@zcong/nest-stack-tracing": "^0.14.1",
     "axios": "^0.19.2"
   }
 }

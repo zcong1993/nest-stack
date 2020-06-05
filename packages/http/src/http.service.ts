@@ -1,21 +1,30 @@
 import Axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { RequestContext } from '@zcong/nest-stack-context';
-import { Observable } from 'rxjs';
-import { Inject, HttpService as BaseHttpService } from '@nestjs/common';
+import { Observable, from } from 'rxjs';
+import {
+  Inject,
+  HttpService as BaseHttpService,
+  Optional,
+} from '@nestjs/common';
+import { Tracer, Tags, FORMAT_HTTP_HEADERS } from 'opentracing';
 import {
   NEST_STACK_AXIOS_INSTANCE_TOKEN,
   NEST_STACK_HTTP_MODULE_OPTIONS,
 } from './http.constants';
 import { HttpModuleOptions } from './http.interfaces';
+import { NEST_STACK_TRACER } from '@zcong/nest-stack-tracing';
 
 export class HttpTracingService extends BaseHttpService {
   private redirectHeaderKeys: string[];
+  private readonly tracer: Tracer;
+  private readonly config?: HttpModuleOptions;
 
   constructor(
     @Inject(NEST_STACK_HTTP_MODULE_OPTIONS)
     config?: HttpModuleOptions,
     @Inject(NEST_STACK_AXIOS_INSTANCE_TOKEN)
     instance?: AxiosInstance,
+    @Optional() @Inject(NEST_STACK_TRACER) tracer?: Tracer,
   ) {
     if (config) {
       instance = Axios.create(config);
@@ -23,19 +32,21 @@ export class HttpTracingService extends BaseHttpService {
     super(instance);
     this.redirectHeaderKeys = config.redirectHeaderKeys || [
       'x-request-id',
-      'x-b3-traceid',
-      'x-b3-spanid',
-      'x-b3-parentspanid',
-      'x-b3-sampled',
-      'x-b3-flags',
-      'x-ot-span-context',
+      // 'x-b3-traceid',
+      // 'x-b3-spanid',
+      // 'x-b3-parentspanid',
+      // 'x-b3-sampled',
+      // 'x-b3-flags',
+      // 'x-ot-span-context',
       'x-user',
     ];
+    this.config = config;
+    this.tracer = tracer;
   }
 
   request<T = any>(config: AxiosRequestConfig): Observable<AxiosResponse<T>> {
     const c = this.injectRedirectHeadersToConfig(config);
-    return super.request(c);
+    return this.traceWrapper((cc) => super.request(cc).toPromise(), c);
   }
 
   get<T = any>(
@@ -43,7 +54,7 @@ export class HttpTracingService extends BaseHttpService {
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
     const c = this.injectRedirectHeadersToConfig(config);
-    return super.get(url, c);
+    return this.traceWrapper((cc) => super.get(url, cc).toPromise(), c, url);
   }
 
   delete<T = any>(
@@ -51,7 +62,7 @@ export class HttpTracingService extends BaseHttpService {
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
     const c = this.injectRedirectHeadersToConfig(config);
-    return super.delete(url, c);
+    return this.traceWrapper((cc) => super.delete(url, cc).toPromise(), c, url);
   }
 
   head<T = any>(
@@ -59,7 +70,7 @@ export class HttpTracingService extends BaseHttpService {
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
     const c = this.injectRedirectHeadersToConfig(config);
-    return super.head(url, c);
+    return this.traceWrapper((cc) => super.head(url, cc).toPromise(), c, url);
   }
 
   post<T = any>(
@@ -68,7 +79,11 @@ export class HttpTracingService extends BaseHttpService {
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
     const c = this.injectRedirectHeadersToConfig(config);
-    return super.post(url, c);
+    return this.traceWrapper(
+      (cc) => super.post(url, data, cc).toPromise(),
+      c,
+      url,
+    );
   }
 
   put<T = any>(
@@ -77,7 +92,11 @@ export class HttpTracingService extends BaseHttpService {
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
     const c = this.injectRedirectHeadersToConfig(config);
-    return super.put(url, c);
+    return this.traceWrapper(
+      (cc) => super.put(url, data, cc).toPromise(),
+      c,
+      url,
+    );
   }
 
   patch<T = any>(
@@ -86,7 +105,45 @@ export class HttpTracingService extends BaseHttpService {
     config?: AxiosRequestConfig,
   ): Observable<AxiosResponse<T>> {
     const c = this.injectRedirectHeadersToConfig(config);
-    return super.patch(url, c);
+    return this.traceWrapper(
+      (cc) => super.patch(url, data, cc).toPromise(),
+      c,
+      url,
+    );
+  }
+
+  private traceWrapper<T>(
+    fn: (config: AxiosRequestConfig) => Promise<T>,
+    config: AxiosRequestConfig,
+    url?: string,
+  ) {
+    if (!this.config.withTracing) {
+      return from(fn(config));
+    }
+
+    const span = (RequestContext.currentRequest() as any).span;
+    const newSpan = this.tracer.startSpan('curl', { childOf: span.context() });
+    const headers = {
+      ...config.headers,
+    };
+
+    newSpan.setTag(Tags.HTTP_URL, url || config.url);
+    newSpan.setTag(Tags.HTTP_METHOD, (config.method || 'GET').toUpperCase());
+    newSpan.setTag(Tags.SPAN_KIND, Tags.SPAN_KIND_RPC_CLIENT);
+    // Send span context via request headers (parent id etc.)
+    this.tracer.inject(newSpan, FORMAT_HTTP_HEADERS, headers);
+    config.headers = headers;
+
+    return from(
+      fn(config)
+        .catch((err) => {
+          newSpan.setTag(Tags.ERROR, true);
+          throw err;
+        })
+        .finally(() => {
+          newSpan.finish();
+        }),
+    );
   }
 
   private injectRedirectHeadersToConfig(config?: AxiosRequestConfig) {
