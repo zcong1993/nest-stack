@@ -1,0 +1,39 @@
+{
+  "name": "@zcong/nest-stack-tracing",
+  "version": "0.13.4",
+  "description": "> TODO: description",
+  "author": "zcong1993 <zhangcong1992@gmail.com>",
+  "homepage": "https://github.com/zcong1993/nest-stack#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zcong1993/nest-stack.git"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/zcong1993/nest-stack/issues"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^7.0.0",
+    "@zcong/nest-stack-context": "*"
+  },
+  "devDependencies": {
+    "@types/jaeger-client": "^3.15.4",
+    "@zcong/nest-stack-context": "*"
+  },
+  "dependencies": {
+    "jaeger-client": "^3.18.0",
+    "opentracing": "^0.14.4"
+  }
+}
