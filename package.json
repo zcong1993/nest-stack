@@ -1,6 +1,7 @@
 {
   "name": "nest-stack",
   "version": "0.1.0",
+  "private": true,
   "description": "",
   "author": "",
   "license": "MIT",
@@ -53,5 +54,8 @@
     },
     "coverageDirectory": "./coverage",
     "testEnvironment": "node"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }
