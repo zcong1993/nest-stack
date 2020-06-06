@@ -3,6 +3,7 @@ import { ModuleMetadata, Provider, Type } from '@nestjs/common/interfaces';
 
 export interface HttpModuleOptions extends AxiosRequestConfig {
   redirectHeaderKeys?: string[];
+  withTracing?: boolean;
 }
 
 export interface HttpModuleOptionsFactory {
