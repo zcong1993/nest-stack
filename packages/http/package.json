@@ -35,6 +35,6 @@
   },
   "dependencies": {
     "@zcong/nest-stack-tracing": "^0.13.5",
-    "axios": "^0.19.2"
+    "axios": "^0.20.0"
   }
 }
