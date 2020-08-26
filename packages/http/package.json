@@ -34,7 +34,6 @@
     "opentracing": "^0.14.4"
   },
   "dependencies": {
-    "@zcong/nest-stack-tracing": "^0.13.5",
-    "axios": "^0.20.0"
+    "@zcong/nest-stack-tracing": "^0.13.5"
   }
 }
