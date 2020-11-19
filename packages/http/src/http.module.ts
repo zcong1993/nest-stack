@@ -25,12 +25,16 @@ import {
   exports: [HttpTracingService],
 })
 export class HttpTracingModule {
-  static register(config: HttpModuleOptions): DynamicModule {
+  static register(
+    config: HttpModuleOptions,
+    global: boolean = false,
+  ): DynamicModule {
     const imports = [];
     if (config.withTracing) {
       imports.push(TracerModule);
     }
     return {
+      global,
       module: HttpTracingModule,
       providers: [
         {
@@ -46,8 +50,12 @@ export class HttpTracingModule {
     };
   }
 
-  static registerAsync(options: HttpModuleAsyncOptions): DynamicModule {
+  static registerAsync(
+    options: HttpModuleAsyncOptions,
+    global: boolean = false,
+  ): DynamicModule {
     return {
+      global,
       module: HttpTracingModule,
       imports: options.imports,
       providers: [
