@@ -1,6 +1,6 @@
 {
   "name": "@zcong/nest-stack-http",
-  "version": "0.41.4",
+  "version": "0.41.5",
   "description": "> TODO: description",
   "author": "zcong1993 <zhangcong1992@gmail.com>",
   "homepage": "https://github.com/zcong1993/nest-stack#readme",
@@ -31,10 +31,10 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.9",
-    "@zcong/nest-stack-context": "^0.41.4",
+    "@zcong/nest-stack-context": "^0.41.5",
     "opentracing": "^0.14.4"
   },
   "dependencies": {
-    "@zcong/nest-stack-tracing": "^0.41.4"
+    "@zcong/nest-stack-tracing": "^0.41.5"
   }
 }
