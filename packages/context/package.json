@@ -1,6 +1,6 @@
 {
   "name": "@zcong/nest-stack-context",
-  "version": "0.13.5",
+  "version": "0.40.0",
   "description": "request context module",
   "author": "zcong1993 <zhangcong1992@gmail.com>",
   "homepage": "https://github.com/zcong1993/nest-stack#readme",
