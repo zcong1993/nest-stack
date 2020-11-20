@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { setupContext } from '@zcong/nest-stack-context';
+import { setupContext } from '../../src';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
