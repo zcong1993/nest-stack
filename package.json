@@ -11,8 +11,8 @@
     "lint": "tslint -p tsconfig.json -c tslint.json \"packages/**/*.ts\"",
     "build": "npm run clean && lerna run tsc",
     "clean": "rm -rf packages/*/dist",
-    "test": "npm run lint && lerna run test --scope=@zcong/nest-stack-prometheus --scope=@zcong/nest-stack-config",
-    "test:cov": "npm run lint && npm run build && lerna run test:cov --scope=@zcong/nest-stack-prometheus --scope=@zcong/nest-stack-config"
+    "test": "npm run lint && lerna run test --scope=@zcong/nest-stack-prometheus --scope=@zcong/nest-stack-config --scope=@zcong/nest-stack-context",
+    "test:cov": "npm run lint && npm run build && lerna run test:cov --scope=@zcong/nest-stack-prometheus --scope=@zcong/nest-stack-config --scope=@zcong/nest-stack-context"
   },
   "dependencies": {
     "reflect-metadata": "^0.1.13"

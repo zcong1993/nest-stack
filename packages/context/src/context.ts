@@ -13,6 +13,9 @@ export class RequestContext {
     this.request = request;
     this.response = response;
     this.requestId = (request.headers['x-request-id'] as string) || uuidV4();
+    if (!(request.headers['x-request-id'] as string)) {
+      request.headers['x-request-id'] = this.requestId;
+    }
   }
 
   public static currentRequestContext(): RequestContext {

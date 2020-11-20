@@ -18,7 +18,8 @@
     "url": "git+https://github.com/zcong1993/nest-stack.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
+    "test": "jest --config ./jest-e2e.json --runInBand",
+    "test:cov": "jest --config ./jest-e2e.json --runInBand --coverage ",
     "tsc": "tsc"
   },
   "bugs": {
