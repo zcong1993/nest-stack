@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
-import { setupContext } from '../../src';
+import { RequestContext, setupContext } from '../../src';
 
 describe('All in one', () => {
   let server: Server;
@@ -36,6 +36,10 @@ describe('All in one', () => {
       .set('x-request-id', xReqId)
       .expect(200, 'test');
     expect(res.header['x-request-id']).toBe(xReqId);
+  });
+
+  it('should got null when call currentRequest not in request scope', () => {
+    expect(RequestContext.currentRequest()).toBeNull();
   });
 
   afterEach(async () => {
