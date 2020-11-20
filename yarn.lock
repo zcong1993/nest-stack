@@ -2319,11 +2319,6 @@ async@^2.6.1:
   dependencies:
     lodash "^4.17.14"
 
-asyncctx@^2.0.9:
-  version "2.0.13"
-  resolved "https://registry.yarnpkg.com/asyncctx/-/asyncctx-2.0.13.tgz#2cc40218bb71260978b583e2fbd8afa2802a7ced"
-  integrity sha512-14aUwnQdJIx/+3rzxFNutsr2rfO6WI1CpKQuPQ8LykD3itbyl0FLg12LJRMHbAsTV5AT/oVigxm0nybUTuTaSg==
-
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
