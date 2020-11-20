@@ -1,6 +1,6 @@
 {
   "name": "@zcong/nest-stack-tracing",
-  "version": "0.41.5",
+  "version": "0.41.7",
   "description": "> TODO: description",
   "author": "zcong1993 <zhangcong1992@gmail.com>",
   "homepage": "https://github.com/zcong1993/nest-stack#readme",
@@ -31,7 +31,7 @@
   "devDependencies": {
     "@types/express": "^4.17.9",
     "@types/jaeger-client": "^3.15.4",
-    "@zcong/nest-stack-context": "^0.41.5"
+    "@zcong/nest-stack-context": "^0.41.7"
   },
   "dependencies": {
     "jaeger-client": "^3.18.0",
