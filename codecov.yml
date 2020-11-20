@@ -6,6 +6,9 @@ coverage:
       config:
         flags: config
       context:
+        target: auto
+        threshold: 5%
+        base: auto
         flags: context
 
 flags:
