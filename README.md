@@ -1,6 +1,6 @@
 # Nest Stack
 
-[![CircleCI](https://circleci.com/gh/zcong1993/nest-stack/tree/master.svg?style=shield)](https://circleci.com/gh/zcong1993/nest-stack/tree/master)
+![Test](https://github.com/zcong1993/nest-stack/workflows/JS%20Test/badge.svg)
 
 > nestjs 常用工具包
 
