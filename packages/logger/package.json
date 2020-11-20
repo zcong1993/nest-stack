@@ -1,6 +1,6 @@
 {
   "name": "@zcong/nest-stack-logger",
-  "version": "0.13.5",
+  "version": "0.41.7",
   "description": "> TODO: description",
   "author": "zcong1993 <zhangcong1992@gmail.com>",
   "homepage": "https://github.com/zcong1993/nest-stack#readme",
@@ -30,12 +30,14 @@
   "peerDependencies": {
     "@nestjs/common": "^7.0.0",
     "@zcong/nest-stack-context": "*",
-    "winston": "^3.2.1",
-    "winston-daily-rotate-file": "^4.4.0"
+    "winston": "^3.2.1"
   },
   "devDependencies": {
-    "@zcong/nest-stack-context": "^0.13.5",
-    "winston": "^3.2.1",
-    "winston-daily-rotate-file": "^4.4.0"
+    "@types/express": "^4.17.9",
+    "@zcong/nest-stack-context": "^0.41.7",
+    "winston": "^3.2.1"
+  },
+  "engines": {
+    "node": ">=13.10.0"
   }
 }
