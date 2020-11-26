@@ -9,9 +9,10 @@ export const promMw = (c: Config) => {
     register.setDefaultLabels(c.defaultLabels);
   }
 
-  const requestCounter = createHttpRequestCounter();
+  const requestCounter = createHttpRequestCounter(c.requestTotalMetricName);
   const requestDurationSummary = createRequestDuration(
     c.requestDurationUseHistogram,
+    c.requestDurationMetricName,
   );
 
   return (req: Request, res: Response, next: any) => {

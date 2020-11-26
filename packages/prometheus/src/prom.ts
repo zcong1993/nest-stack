@@ -7,26 +7,26 @@ import {
 } from 'prom-client';
 import { Request, Response } from 'express';
 
-export const createHttpRequestCounter = () => {
+export const createHttpRequestCounter = (name?: string) => {
   return new Counter({
-    name: 'http_request_total',
+    name: name || 'http_request_total',
     help: 'Counter for total requests received',
     labelNames: ['method', 'routerName', 'route', 'status', 'originStatus'],
   });
 };
 
-export const createRequestDuration = (useHistogram: boolean) => {
+export const createRequestDuration = (useHistogram: boolean, name?: string) => {
   if (useHistogram) {
     return new Histogram({
-      name: 'http_request_duration_ms',
+      name: name || 'http_request_duration_ms',
       help: 'Duration of HTTP requests in ms',
       labelNames: ['method', 'routerName', 'route', 'status', 'originStatus'],
-      buckets: [5, 10, 25, 50, 100, 250, 500, 1000],
+      buckets: [5, 10, 25, 50, 100, 250, 500, 1000, 2000, 4000],
     });
   }
 
   return new Summary({
-    name: 'http_request_duration_ms',
+    name: name || 'http_request_duration_ms',
     help: 'Duration of HTTP requests in ms',
     labelNames: ['method', 'routerName', 'route', 'status', 'originStatus'],
   });

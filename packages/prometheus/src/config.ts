@@ -11,6 +11,8 @@ export interface Config {
   defaultLabels?: Record<string, string>;
   statusNormalizer?: StatusNormalizer;
   requestDurationUseHistogram?: boolean;
+  requestTotalMetricName?: string;
+  requestDurationMetricName?: string;
 }
 
 export const defaultStatusNormalizer: StatusNormalizer = (res) => {

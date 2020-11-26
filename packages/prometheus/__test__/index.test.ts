@@ -114,3 +114,23 @@ it('statusNormalizer should work well', async () => {
 
   clear();
 });
+
+it('custom metric name should work well', async () => {
+  const config: Config = {
+    requestTotalMetricName: 'http_request_total_1',
+    requestDurationMetricName: 'http_response_time_ms',
+  };
+
+  const app = await createApp(config);
+
+  await request(app.getHttpServer()).get('/');
+  await request(app.getHttpServer()).get('/test');
+
+  const res = await request(app.getHttpServer()).get('/metrics');
+  expect(res.status).toBe(200);
+
+  expect(res.text).toMatch(/TYPE http_response_time_ms histogram/);
+  expect(res.text).toMatch(/TYPE http_request_total_1 counter/);
+
+  clear();
+});
