@@ -4,15 +4,13 @@ import { Observable, from } from 'rxjs';
 import {
   Inject,
   HttpService as BaseHttpService,
-  Optional,
 } from '@nestjs/common';
-import { Tracer, Tags, FORMAT_HTTP_HEADERS } from 'opentracing';
+import { Tracer, Tags, FORMAT_HTTP_HEADERS, globalTracer } from 'opentracing';
 import {
   NEST_STACK_AXIOS_INSTANCE_TOKEN,
   NEST_STACK_HTTP_MODULE_OPTIONS,
 } from './http.constants';
 import { HttpModuleOptions } from './http.interfaces';
-import { NEST_STACK_TRACER } from '@zcong/nest-stack-tracing';
 
 export class HttpTracingService extends BaseHttpService {
   private redirectHeaderKeys: string[];
@@ -24,7 +22,6 @@ export class HttpTracingService extends BaseHttpService {
     config?: HttpModuleOptions,
     @Inject(NEST_STACK_AXIOS_INSTANCE_TOKEN)
     instance?: AxiosInstance,
-    @Optional() @Inject(NEST_STACK_TRACER) tracer?: Tracer,
   ) {
     if (config) {
       instance = Axios.create(config);
@@ -41,7 +38,7 @@ export class HttpTracingService extends BaseHttpService {
       'x-user',
     ];
     this.config = config;
-    this.tracer = tracer;
+    this.tracer = globalTracer();
   }
 
   request<T = any>(config: AxiosRequestConfig): Observable<AxiosResponse<T>> {
@@ -122,6 +119,11 @@ export class HttpTracingService extends BaseHttpService {
     }
 
     const span = (RequestContext.currentRequest() as any).span;
+
+    if (!span) {
+      return from(fn(config));
+    }
+
     const newSpan = this.tracer.startSpan('curl', { childOf: span.context() });
     const headers = {
       ...config.headers,
