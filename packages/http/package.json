@@ -1,6 +1,6 @@
 {
   "name": "@zcong/nest-stack-http",
-  "version": "0.42.0",
+  "version": "0.43.0-alpha.0",
   "description": "> TODO: description",
   "author": "zcong1993 <zhangcong1992@gmail.com>",
   "homepage": "https://github.com/zcong1993/nest-stack#readme",
@@ -35,7 +35,7 @@
     "opentracing": "^0.14.4"
   },
   "dependencies": {
-    "@zcong/nest-stack-tracing": "^0.42.0"
+    "@zcong/nest-stack-tracing": "^0.43.0-alpha.0"
   },
   "engines": {
     "node": ">=13.10.0"
