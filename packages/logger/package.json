@@ -28,7 +28,7 @@
     "colors": "^1.4.0"
   },
   "peerDependencies": {
-    "@nestjs/common": "^7.0.0",
+    "@nestjs/common": "^8.0.0",
     "@zcong/nest-stack-context": "*",
     "winston": "^3.2.1"
   },
