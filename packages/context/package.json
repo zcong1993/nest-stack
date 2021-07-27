@@ -18,23 +18,22 @@
     "url": "git+https://github.com/zcong1993/nest-stack.git"
   },
   "scripts": {
-    "test": "jest --config ./jest-e2e.json --runInBand",
-    "test:cov": "jest --config ./jest-e2e.json --runInBand --coverage ",
-    "tsc": "tsc"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "tsc": "tsc --build tsconfig.json"
   },
   "bugs": {
     "url": "https://github.com/zcong1993/nest-stack/issues"
   },
   "dependencies": {
-    "uuid": "^8.0.0"
+    "@zcong/context-async-hooks": "^0.1.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@types/express": "^4.17.9",
-    "@types/uuid": "^8.0.0"
+    "@types/express": "^4.17.13",
+    "@types/uuid": "^8.3.1"
   },
   "peerDependencies": {
-    "@nestjs/common": "^7.0.0",
-    "rxjs": "^6.0.0"
+    "@nestjs/common": "^8.0.4"
   },
   "engines": {
     "node": ">=13.10.0"

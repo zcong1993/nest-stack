@@ -9,8 +9,7 @@
     "experimentalDecorators": true,
     "target": "es2017",
     "sourceMap": true,
-    "outDir": "./dist",
-    "incremental": true
+    "outDir": "./dist"
   },
   "include": ["packages/**/*", "integration/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

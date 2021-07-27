@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { register } from 'prom-client';
 import * as request from 'supertest';
 import { Response } from 'express';
-import { Config, setupProm, defaultStatusNormalizer } from '../src';
+import { Config, setupProm } from '../src';
 
 const clear = () => register.clear();
 
@@ -57,9 +57,9 @@ it('default config should work well', async () => {
   // test collect default metrics
   expect(res.text).toMatch(/process_cpu_user_seconds_total/);
   expect(res.text).toMatch(/TYPE http_request_duration_ms histogram/);
-  expect(res.text).toMatch(/status="2xx"/);
-  expect(res.text).toMatch(/status="3xx"/);
-  expect(res.text).toMatch(/status="4xx"/);
+  expect(res.text).toMatch(/status="200"/);
+  expect(res.text).toMatch(/status="300"/);
+  expect(res.text).toMatch(/status="400"/);
   expect(res.text).toMatch(/route="\/regex\/:id"/);
 
   clear();
@@ -86,31 +86,6 @@ it('custom config should work well', async () => {
   expect(res.text).not.toMatch(/process_cpu_user_seconds_total/);
   expect(res.text).toMatch(/TYPE http_request_duration_ms summary/);
   expect(res.text).toMatch(/app="test"/);
-
-  clear();
-});
-
-it('statusNormalizer should work well', async () => {
-  const config: Config = {
-    statusNormalizer: (r) => {
-      if (r.statusCode === 400) {
-        return '2xx';
-      }
-      return defaultStatusNormalizer(r);
-    },
-  };
-
-  const app = await createApp(config);
-
-  await request(app.getHttpServer()).get('/?status=400');
-
-  const res = await request(app.getHttpServer()).get('/metrics');
-  expect(res.text).not.toMatch(/status="4xx"/);
-  expect(res.text).toMatch(/status="2xx"/);
-
-  await request(app.getHttpServer()).get('/?status=500');
-  const res1 = await request(app.getHttpServer()).get('/metrics');
-  expect(res1.text).toMatch(/status="5xx"/);
 
   clear();
 });
