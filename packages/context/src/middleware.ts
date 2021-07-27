@@ -5,13 +5,13 @@ import { context, Context } from './context';
 export const createContextMiddleware =
   (cm: ContextManager<Context> = context) =>
   async (req: Request, res: Response, next: () => void) => {
-    const context: Context = {
+    const ctx: Context = {
       req,
       res,
     };
 
-    cm.bind(context, req);
-    cm.bind(context, res);
+    cm.bind(ctx, req);
+    cm.bind(ctx, res);
 
-    cm.with(context, next);
+    cm.with(ctx, next);
   };
