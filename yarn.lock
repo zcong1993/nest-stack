@@ -1907,10 +1907,10 @@
   resolved "https://registry.npmjs.org/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-"@zcong/context-async-hooks@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.npmjs.org/@zcong/context-async-hooks/-/context-async-hooks-0.1.2.tgz#7b3d652a8d737c33f644975ad413c8fce3c91fc8"
-  integrity sha512-4E8AH19Z7t4ZREeyyh+8fXOs4y8EkrbSkDCLq+zMM1aMcAeFqSlN3vQtQgtKn7ZTRBepaLaQwx9WsJBHlEHxlg==
+"@zcong/context-async-hooks@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@zcong/context-async-hooks/-/context-async-hooks-0.2.0.tgz#209c3303914e0393d60e5fa014853a3663ecbd2c"
+  integrity sha512-/5doyr0xujfuVPRSy7sTHZR36Zpwppsx+kSnxNKQjdeDy+cCfZDk0xjrFJN9UIim4fwq2xGyELNWBwyDpsXQQg==
   dependencies:
     semver "^7.3.5"
 
