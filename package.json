@@ -15,7 +15,7 @@
     "test:cov": "npm run lint && npm run build && lerna run test:cov --scope=@zcong/nest-stack-prometheus"
   },
   "dependencies": {
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.2.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
